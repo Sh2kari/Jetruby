@@ -1,3 +1,4 @@
-%h1 All courses
+- @courses.each do |course|
+	%h2= link_to course.title.humanize, course
 
 = link_to 'New Course', new_course_path
