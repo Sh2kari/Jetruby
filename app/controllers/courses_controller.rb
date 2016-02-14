@@ -1,8 +1,10 @@
 class CoursesController < ApplicationController
   before_action :find_course, only: [:show, :edit, :update, :destroy]
 
+  PER_PAGE = 2
+
   def index
-    @courses = Course.all
+    @courses = Course.recent.page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def new
@@ -41,7 +43,7 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:title, :description)
+    params.require(:course).permit(:title, :description, :cover)
   end
 
   def find_course

@@ -1,4 +1,9 @@
-- @courses.each do |course|
-	%h2= link_to course.title.humanize, course
+- if @courses.present?
+	- @courses.each do |course|
+		%h2= link_to course.title.humanize, course
+		%p= image_tag course.cover.url(:thumb)
+	= paginate @courses
+- else
+	%h2 No courses
 
 = link_to 'New Course', new_course_path
