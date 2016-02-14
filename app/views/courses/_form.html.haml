@@ -1,8 +1,9 @@
-= simple_form_for course do |f|
-	= f.input :title
-	%br/
-	= f.input :description
-	%br/
-	= f.input :cover, as: :file
-	%br/
-	= f.button :submit
+= simple_form_for course, html: { multipart: true } do |f|
+	.panel-body
+		= f.input :title
+		%br/
+		= f.input :description
+		%br/
+		= f.input :cover, as: :file
+		%br/
+		= f.button :submit
