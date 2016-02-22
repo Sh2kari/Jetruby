@@ -17,6 +17,9 @@ gem 'mini_magick', '~> 4.4'
 gem 'kaminari', '~> 0.16.3'
 gem 'devise', '~> 3.5.4'
 gem 'rubocop', '~> 0.37.2'
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'jquery-ui-rails', '~> 5.0'
+gem 'font-awesome-sass', '~> 4.5'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
