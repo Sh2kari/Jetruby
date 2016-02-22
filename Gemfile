@@ -15,6 +15,7 @@ gem 'simple_form', '~> 3.2'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.4'
 gem 'kaminari', '~> 0.16.3'
+gem 'devise', '~> 3.5'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
