@@ -1,9 +1,14 @@
-- if @courses.present?
-  - @courses.each do |course|
-    %h2= link_to course.title.humanize, course
-    %p= image_tag course.cover.url(:thumb)
-  = paginate @courses
-- else
-  %h2 No courses
-
-= link_to 'New Course', new_course_path
+.content
+	.row
+		.col-md-12
+			- if @courses.present?
+				- @courses.each do |course|
+					.col-md-3
+						.thumbnail
+							= course.title.humanize
+							%br
+							= course.description
+							= image_tag course.cover.thumb
+				= paginate @courses
+			- else
+				%h2 No courses

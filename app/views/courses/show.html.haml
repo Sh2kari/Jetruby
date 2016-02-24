@@ -1,7 +1,0 @@
-%h1= @course.title.humanize
-%p= @course.description.humanize
-%p= image_tag @course.cover.url(:thumb)
-
-= link_to 'Back', root_path
-= link_to 'Edit', edit_course_path
-= link_to 'Delete', course_path, method: :delete, data: { confirm: 'Are you sure?' }

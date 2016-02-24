@@ -1,9 +1,17 @@
-%h2 Log in
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .form-inputs
-    = f.input :email, required: false, autofocus: true
-    = f.input :password, required: false
-    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-  .form-actions
-    = f.button :submit, "Log in"
-= render "devise/shared/links"
+.row
+	.col-md-8.col-xs-8.col-xs-offset-2.col-md-offset-2
+		.box.box-primary
+			.box-header.with-border
+				%h4 Log in
+			.box-body
+				.form-group
+					= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+						= f.error_notification
+						.form-inputs
+							= f.input :email, required: false, autofocus: true
+							= f.input :password, required: false
+							= f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+						.form-actions
+							= f.button :submit, "Log in", class: 'btn btn-primary'
+
+				= render "devise/shared/links"

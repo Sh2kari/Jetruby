@@ -19,5 +19,4 @@
 //= require app
 //= require pages/dashboard
 //= require demo
-//= require turbolinks
 //= require_tree .

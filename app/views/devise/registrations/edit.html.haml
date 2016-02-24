@@ -1,10 +1,23 @@
-%h2 Sign up
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-    = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
-    = f.input :password_confirmation, required: true
-  .form-actions
-    = f.button :submit, "Sign up"
-= render "devise/shared/links"
+.row
+	.col-md-8.col-xs-8.col-xs-offset-2.col-md-offset-2
+		.box.box-primary
+			.box-header.with-border
+				%h4 Edit #{resource_name.to_s.humanize}
+			.box-body
+				.form-group
+					= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+						= f.error_notification
+						.form-inputs
+							= f.input :email, required: true, autofocus: true
+							- if devise_mapping.confirmable? && resource.pending_reconfirmation?
+								%p
+									Currently waiting confirmation for: #{resource.unconfirmed_email}
+							= f.input :password, autocomplete: "off", required: false
+							= f.input :password_confirmation, required: false
+							= f.input :current_password, required: true
+						.form-actions
+							= f.button :submit, "Update", class: 'btn btn-primary'
+
+				#{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+				|
+				= link_to "Back", :back
