@@ -1,5 +1,3 @@
-module Users
-  class BaseController < ApplicationController
-    before_filter :authenticate_user!
-  end
+class Users::BaseController < ApplicationController
+  before_filter :authenticate_user!
 end

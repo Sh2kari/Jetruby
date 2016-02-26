@@ -23,5 +23,8 @@ Style/SpaceAroundEqualsInParameterDefault:
 Style/ParallelAssignment:
   Enabled: false
 
+Style/ClassAndModuleChildren:
+  Enabled: false
+
 Metrics/LineLength:
   Max: 130

@@ -4,6 +4,6 @@ class CourseCoverUploader < BaseUploader
   end
 
   version :admin_thumb do
-    process resize_and_pad: [200, 200]
+    process resize_and_pad: [150, 150]
   end
 end

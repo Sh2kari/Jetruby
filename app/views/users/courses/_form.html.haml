@@ -1,8 +1,8 @@
 .box-body
-	.form-group
-		= simple_form_for [:users, course], html: { multipart: true } do |f|
-			= f.input :title
-			= f.input :description
-			= f.input :cover, as: :file
-			= f.button :submit, class: 'btn btn-primary'
+  .form-group
+    = simple_form_for [:users, course], html: { multipart: true } do |f|
+      = f.input :title
+      = f.input :description
+      = f.input :cover, as: :file
+      = f.button :submit, class: 'btn btn-primary'
 

@@ -6,6 +6,5 @@ feature 'Courses list' do
   scenario 'User is able to see a courses list.' do
     visit courses_path
     expect(page).to have_content course.title
-    expect(page).to have_content course.description
   end
 end
