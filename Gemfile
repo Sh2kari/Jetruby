@@ -26,12 +26,18 @@ gem 'font-awesome-sass', '~> 4.5'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 gem 'rubocop', '~> 0.37.2'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do
