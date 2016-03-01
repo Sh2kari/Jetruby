@@ -1,0 +1,35 @@
+.content
+  .row
+    .col-md-12
+      %h1 #{course.title} Course
+
+      %table.table.table-bordered
+        %tbody
+          %tr
+            %th Title
+            %th Position
+            %th Description
+            %th Cover
+            %th Summary
+            %th Homework
+            %th Action
+          - @lessons.each do |lesson|
+            %tr
+              %td
+                = lesson.title
+              %td
+                = lesson.position
+              %td
+                = lesson.description
+              %td
+                = image_tag lesson.cover.thumb
+              %td
+                = lesson.summary
+              %td
+                = lesson.homework
+              %td
+                = link_to 'Edit', edit_course_lesson_path(course, lesson), class: "btn btn-default"
+                = link_to 'Delete', [course, lesson], method: :delete, data: { confrim: 'Are you sure?'}, class: "btn btn-default"
+
+      - if user_signed_in? && course.user.id == current_user.id
+        = link_to 'New Lesson', new_course_lesson_path

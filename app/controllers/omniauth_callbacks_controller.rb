@@ -14,7 +14,7 @@ class OmniauthCallbacksController < ApplicationController
     oauth_data = request.env['omniauth.auth']
 
     unless user_signed_in?
-      user = sign_in_with_oauth_data(oauth_data)
+      sign_in_with_oauth_data(oauth_data)
     end
     current_user.register_social_profile(oauth_data.provider, oauth_data.uid)
 
