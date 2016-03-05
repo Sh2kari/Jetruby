@@ -1,8 +1,10 @@
 class LessonsController < ApplicationController
   before_filter :load_lesson, only: [:show, :edit, :update, :destroy]
 
+  PER_PAGE = 4
+
   def index
-    @lessons = course.lessons
+    @lessons = course.lessons.where(hidden: false).page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def show
@@ -52,6 +54,6 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :description)
+    params.require(:lesson).permit(:title, :position, :description, :cover, :summary, :homework, :hidden)
   end
 end
