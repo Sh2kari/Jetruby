@@ -4,7 +4,7 @@ class LessonsController < ApplicationController
   PER_PAGE = 4
 
   def index
-    @lessons = course.lessons.where(hidden: false).page(params[:page]).per(params[:per_page] || PER_PAGE)
+    @lessons = course.lessons.order(sort_column + ' ' + sort_direction).where(hidden: false).page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def show
@@ -30,7 +30,7 @@ class LessonsController < ApplicationController
   def update
     if @lesson.update(lesson_params)
       flash[:success] = 'Lesson was updated.'
-      redirect_to course_lessons_path
+      redirect_to users_course_lessons_path
     else
       render :edit
     end
@@ -56,4 +56,14 @@ class LessonsController < ApplicationController
   def lesson_params
     params.require(:lesson).permit(:title, :position, :description, :cover, :summary, :homework, :hidden)
   end
+
+  def sort_column
+    Lesson.column_names.include?(params[:sort]) ? params[:sort] : 'title'
+  end
+  helper_method :sort_direction
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+  helper_method :sort_column
 end

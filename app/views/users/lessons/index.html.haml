@@ -3,11 +3,11 @@
     .col-md-12
       %h1 #{course.title} Course
 
-      %table.table.table-bordered
+      %table.pretty.table.table-bordered
         %tbody
           %tr
-            %th Title
-            %th Position
+            %th= sortable 'title'
+            %th= sortable 'position'
             %th Description
             %th Cover
             %th Summary
