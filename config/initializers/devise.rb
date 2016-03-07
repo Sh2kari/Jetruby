@@ -240,8 +240,8 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  #config.omniauth :twitter, ENV['twitter_token'], ENV['twitter_key']
-  #config.omniauth :facebook, ENV['facebook_token'], ENV['facebook_key']
+  # config.omniauth :twitter, ENV['twitter_token'], ENV['twitter_key']
+  # config.omniauth :facebook, ENV['facebook_token'], ENV['facebook_key']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

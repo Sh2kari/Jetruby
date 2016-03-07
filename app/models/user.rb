@@ -8,12 +8,11 @@ class User < ActiveRecord::Base
 
   has_one :profile
   has_many :courses
-  has_many :authored_courses, class_name: 'Course', foreign_key: :user_id, dependent: :destroy
+  has_many :authored_courses, class_name: 'Course', foreign_key: :user_id
   has_many :social_profiles
-  has_many :course_users
   has_many :participated_courses, through: :course_users, source: :course
-
-  after_create :create_user_profile
+  has_many :course_users, dependent: :destroy
+  has_many :dismiss, dependent: :destroy
 
   accepts_nested_attributes_for :profile
 
@@ -21,12 +20,5 @@ class User < ActiveRecord::Base
 
   def participate_in?(course)
     course_users.exists?(course_id: course.id)
-  end
-
-  private
-
-  def create_user_profile
-    build_profile
-    profile.save(validates: false)
   end
 end

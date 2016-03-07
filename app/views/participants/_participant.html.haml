@@ -3,3 +3,6 @@
   %td
     - if user_signed_in? && user.id == current_user.id
       = link_to 'Unsubscribe', course_subscriptions_path(course), method: :delete, remote: true
+    %br
+    - if user_signed_in? && course.user.id == current_user.id
+      = link_to 'Dismiss', users_create_course_ban_path(user, course), method: :post, remote: true, data: { confirm: "You sure?" }

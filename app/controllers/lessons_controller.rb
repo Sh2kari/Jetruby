@@ -18,7 +18,7 @@ class LessonsController < ApplicationController
     @lesson = course.lessons.build(lesson_params)
 
     if @lesson.save
-      redirect_to course_lessons_path
+      redirect_to users_course_lessons_path
     else
       render :new
     end
@@ -39,7 +39,7 @@ class LessonsController < ApplicationController
   def destroy
     @lesson.destroy
 
-    redirect_to course_lessons_path
+    redirect_to users_course_lessons_path
   end
 
   private
@@ -63,7 +63,7 @@ class LessonsController < ApplicationController
   helper_method :sort_direction
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
   end
   helper_method :sort_column
 end

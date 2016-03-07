@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305213849) do
+ActiveRecord::Schema.define(version: 20160308212606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,32 @@ ActiveRecord::Schema.define(version: 20160305213849) do
   end
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
+
+  create_table "dismiss", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dismiss", ["user_id", "course_id"], name: "index_dismiss_on_user_id_and_course_id", unique: true, using: :btree
+
+  create_table "dismisses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dismisses", ["user_id", "course_id"], name: "index_dismisses_on_user_id_and_course_id", unique: true, using: :btree
+
+  create_table "homeworks", force: :cascade do |t|
+    t.text    "task"
+    t.string  "name"
+    t.integer "lesson_id", null: false
+  end
+
+  add_index "homeworks", ["lesson_id"], name: "index_homeworks_on_lesson_id", using: :btree
 
   create_table "lessons", force: :cascade do |t|
     t.string   "title"

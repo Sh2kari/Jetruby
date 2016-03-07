@@ -1,0 +1,29 @@
+.content
+  .row
+    .col-md-12
+      %h4 Homework
+
+      %table.table.table-bordered
+        %tbody
+          %tr
+            %th Homework
+            %th User
+          - @homeworks.each do |homework|
+            %tr
+              %td
+                = homework.task
+              %td
+                = homework.name
+
+      %button.btn.btn-primary{"data-target" => "#exampleModal", "data-toggle" => "modal", "data-whatever" => "Deliver Homework", :type => "button"}Deliver Homework
+      #exampleModal.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog{:role => "document"}
+          .modal-content
+            .modal-header
+              %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"}
+              %h4#exampleModalLabel.modal-title New Homework
+            .modal-body
+              .form-group
+                = render 'form', homework: @homework
+

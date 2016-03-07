@@ -1,0 +1,7 @@
+.form-group
+  = simple_form_for [:users, course, lesson, homework]  do |f|
+    = f.input :task
+    = f.input :name
+
+    = f.button :submit, class: 'btn btn-primary'
+    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

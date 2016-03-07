@@ -18,7 +18,7 @@ class Users::LessonsController < Users::BaseController
   helper_method :sort_direction
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
   end
   helper_method :sort_column
 end

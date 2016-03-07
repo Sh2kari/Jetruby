@@ -17,7 +17,7 @@
           - @lessons.each do |lesson|
             %tr
               %td
-                = lesson.title
+                = link_to lesson.title, [course, lesson]
               %td
                 = lesson.position
               %td
