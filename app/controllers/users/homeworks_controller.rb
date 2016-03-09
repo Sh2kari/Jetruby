@@ -11,13 +11,13 @@ class Users::HomeworksController < Users::BaseController
   def create
     @homework = lesson.homeworks.build(homework_params)
 
-    if @homework.save
-      flash[:notice] = 'Well done'
-      redirect_to users_course_lesson_homeworks_path
-    else
-      flash[:notice] = "Field can't be empty"
-      redirect_to users_course_lesson_homeworks_path
-    end
+    flash[:notice] = if @homework.save
+                       'Well done'
+                     else
+                       "Field can't be empty"
+                     end
+
+    redirect_to users_course_lesson_homeworks_path
   end
 
   private

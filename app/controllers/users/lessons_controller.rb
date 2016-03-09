@@ -8,7 +8,7 @@ class Users::LessonsController < Users::BaseController
   private
 
   def course
-    @course = current_user.authored_courses.find(params[:course_id])
+    @course = Course.find(params[:course_id])
   end
   helper_method :course
 
