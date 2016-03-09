@@ -13,7 +13,7 @@ class Course < ActiveRecord::Base
 
   mount_uploader :cover, CourseCoverUploader
 
-  def ban_for?(user)
+  def user_banned?(user)
     bans.exists?(user_id: user.id)
   end
 end

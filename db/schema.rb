@@ -36,15 +36,6 @@ ActiveRecord::Schema.define(version: 20160308212606) do
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
 
-  create_table "dismiss", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "course_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "dismiss", ["user_id", "course_id"], name: "index_dismiss_on_user_id_and_course_id", unique: true, using: :btree
-
   create_table "dismisses", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "course_id"

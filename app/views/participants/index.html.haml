@@ -3,7 +3,7 @@
     .col-md-12
       %h4 Course  #{course.title} participants
 
-      - if user_signed_in?
+      - if user_signed_in? && !course.bans.exists?(current_user)
         #subscription-button{ style: ('display: none' if current_user.participate_in?(course)) }
           = link_to 'Subscribe', course_subscriptions_path(course), method: :post, remote: true
 

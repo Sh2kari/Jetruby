@@ -4,7 +4,7 @@ module Omniauthable
   included do
     attr_accessor :social_login
 
-    def self.find_or_create_with_oauth(oauth_data, user_data={})
+    def self.find_or_create_with_oauth(oauth_data, _user_data={})
       find_with_oauth(oauth_data) || create_with_oauth(oauth_data)
     end
 
@@ -30,12 +30,8 @@ module Omniauthable
 
     def register_social_profile(service_name, uid)
       social_profile = SocialProfile.where(service_name: service_name, uid: uid).first_or_create
-      if social_profile.user_id.present? && social_profile.user_id != id
-        return false
-      else
-        social_profile.update!(user_id: id)
-      end
-
+      return false unless social_profile.user_id.present? && social_profile.user_id != id
+      social_profile.update!(user_id: id)
       social_profile.persisted? ? social_profile : false
     end
 

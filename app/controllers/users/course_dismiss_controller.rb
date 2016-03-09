@@ -1,7 +1,5 @@
 class Users::CourseDismissController < Users::BaseController
-  before_filter :authenticate_user!
-
-  def create
+  def destroy
     course.bans << user
     course.course_users.where(user_id: user.id).first.destroy
   end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :courses, only: :index do
     resources :participants, only: :index
     resource  :subscriptions, only: [:create, :destroy], controller: :course_subscriptions
-    resource :dismiss, only: [:create], controller: :course_dismiss
+    resource :dismiss, only: [:destroy], controller: :course_dismiss
     resources :lessons
   end
 
@@ -17,6 +17,6 @@ Rails.application.routes.draw do
         resources :homeworks
       end
     end
-    post '/:id/courses/:course_id/ban', to: 'course_dismiss#create', as: :create_course_ban
+    delete '/:id/courses/:course_id/ban', to: 'course_dismiss#destroy', as: :delete_course_ban
   end
 end

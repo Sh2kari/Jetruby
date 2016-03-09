@@ -9,7 +9,7 @@
                 %li= course.title.humanize
                 %li= link_to 'Participants', course_participants_path(course)
 
-                - if course.bans.exists?(current_user)
+                - if user_signed_in? && course.bans.exists?(current_user)
                   %p You was dismissed!
                 - else
                   = link_to 'Lessons', users_course_lessons_path(course)
