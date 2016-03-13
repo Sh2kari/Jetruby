@@ -21,4 +21,6 @@
       - else
         %h2 No courses
 
-  = link_to 'New Course', new_users_course_path
+
+  - if current_user.has_role? :trainer
+    = link_to 'New Course', new_users_course_path

@@ -30,6 +30,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
+gem 'rolify', '~> 5.0'
+
 gem 'rubocop', '~> 0.37.2'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
