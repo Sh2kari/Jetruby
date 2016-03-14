@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   after_create :create_user_profile
 
-  after_create :get_default_role
+  after_create :default_role
 
   has_one  :profile, dependent: :destroy
   has_many :courses
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     profile.save(validates: false)
   end
 
-  def get_default_role
+  def default_role
     add_role(:user)
   end
 end
