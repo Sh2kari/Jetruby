@@ -14,12 +14,6 @@
                   %li= link_to 'Lessons',     course_lessons_path(course)
                 %br
                 = image_tag course.cover.thumb
-                = link_to 'Edit Course', edit_users_course_path(course)
-                |
-                = link_to 'Delete Course', users_course_path(course), method: :delete, data: { confirm: 'Are you sure' }
         = paginate @courses
       - else
         %h2 No courses
-
-  - if current_user.has_role? :trainer
-    = link_to 'New Course', new_users_course_path

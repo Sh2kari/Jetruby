@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource  :profile, only: [:edit, :update], controller: :profile
+    resources :subscription_courses, only: [:index]
     resources :courses do
       resources :lessons do
         resources :homeworks
