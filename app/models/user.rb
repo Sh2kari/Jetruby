@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   has_many :social_profiles
   has_many :participated_courses, through: :course_users, source: :course
   has_many :course_users, dependent: :destroy
-  has_many :dismiss, dependent: :destroy
 
   accepts_nested_attributes_for :profile
 
@@ -20,5 +19,9 @@ class User < ActiveRecord::Base
 
   def participate_in?(course)
     course_users.exists?(course_id: course.id)
+  end
+
+  def banned_in?(course)
+    course_users.where(dismiss: false).exists?(course_id: course.id)
   end
 end

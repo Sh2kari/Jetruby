@@ -3,9 +3,9 @@
     .col-md-12
       %h4 Course  #{course.title} participants
 
-      - if user_signed_in? && !course.bans.exists?(current_user)
+      - if user_signed_in?
         #subscription-button{ style: ('display: none' if current_user.participate_in?(course)) }
-          = link_to 'Subscribe', course_subscriptions_path(course), method: :post, remote: true
+          = link_to 'Subscribe', course_subscriptions_path(course), method: :patch, remote: true
 
       %table.table.table-bordered
         %tbody#participants-list

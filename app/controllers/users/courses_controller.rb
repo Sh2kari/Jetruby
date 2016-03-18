@@ -4,7 +4,7 @@ class Users::CoursesController < Users::BaseController
   PER_PAGE = 8
 
   def index
-    @courses = current_user.authored_courses.recent.page(params[:page]).per(params[:per_page] || PER_PAGE).includes(:user)
+    @courses = current_user.authored_courses.page(params[:page]).per(params[:per_page] || PER_PAGE).includes(:user)
   end
 
   def new
