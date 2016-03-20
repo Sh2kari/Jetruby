@@ -1,6 +1,6 @@
 .box-body
   .form-group
-    = simple_form_for [course, lesson], html: { multipart: true } do |f|
+    = simple_form_for [:users, course, lesson], html: { multipart: true } do |f|
       = f.input :title
       = f.input :position
       = f.input :description

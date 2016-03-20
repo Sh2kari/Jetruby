@@ -12,7 +12,7 @@
                 - if user_signed_in? && current_user.try(:banned_in?, course)
                   %p You was dismissed!
                 - else
-                  = link_to 'Lessons', users_course_lessons_path(course)
+                  = link_to 'Lessons', course_lessons_path(course)
 
                 %br
                 = image_tag course.cover.admin_thumb

@@ -6,18 +6,17 @@ Rails.application.routes.draw do
 
   resources :courses, only: :index do
     resources :participants, only: :index
-    resource  :subscriptions, only: [:update, :destroy], controller: :course_subscriptions do
-      patch :dismiss, on: :member
+    resource  :subscriptions, only: [:create, :destroy], controller: :course_subscriptions
+    resources :lessons, only: [:index, :show] do
+      resources :homeworks, only: [:index, :new, :create]
     end
-    resources :lessons
   end
 
   namespace :users do
     resource  :profile, only: [:edit, :update], controller: :profile
     resources :courses do
-      resources :lessons do
-        resources :homeworks
-      end
+      resource  :dismiss, only: :create, controller: :course_dismiss
+      resources :lessons
     end
   end
 end

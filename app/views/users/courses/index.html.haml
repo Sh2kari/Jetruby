@@ -8,10 +8,8 @@
               .thumbnail
                 %li= course.title.humanize
                 %li= link_to 'Participants', course_participants_path(course)
-                - if user_signed_in? && course.user.id == current_user.id
-                  %li= link_to 'Lessons',     users_course_lessons_path(course)
-                - else
-                  %li= link_to 'Lessons',     course_lessons_path(course)
+                - if user_signed_in?
+                  %li= link_to 'Lessons', users_course_lessons_path(course)
                 %br
                 = image_tag course.cover.thumb
                 = link_to 'Edit Course', edit_users_course_path(course)

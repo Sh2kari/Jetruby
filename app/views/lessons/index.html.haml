@@ -28,12 +28,5 @@
                 = lesson.summary
               %td
                 = lesson.homework
-              - if user_signed_in? && course.user.id == current_user.id
-                %td
-                  = link_to 'Edit', edit_course_lesson_path(course, lesson), class: "btn btn-default"
-                  = link_to 'Delete', [course, lesson], method: :delete, data: { confrim: 'Are you sure?'}, class: "btn btn-default"
 
-
-      - if user_signed_in? && course.user.id == current_user.id
-        = link_to 'New Lesson', new_course_lesson_path
     = paginate @lessons

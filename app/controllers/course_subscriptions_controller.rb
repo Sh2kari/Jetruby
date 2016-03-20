@@ -1,16 +1,13 @@
 class CourseSubscriptionsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :current_user_dismissed
 
-  def update
+  def create
     course.participants << current_user
   end
 
   def destroy
     course.course_users.where(user_id: current_user).first.destroy
-  end
-
-  def dismiss
-    course.course_users.find_by_user_id(params[:user_id]).update_attribute(:dismiss, false)
   end
 
   private
@@ -20,8 +17,7 @@ class CourseSubscriptionsController < ApplicationController
   end
   helper_method :course
 
-  def user
-    @user ||= User.find(params[:user_id])
+  def current_user_dismissed
+    render :dismiss if current_user.try(:banned_in?, course)
   end
-  helper_method :user
 end
