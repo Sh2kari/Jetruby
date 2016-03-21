@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
   root 'welcome#index'
 
@@ -6,17 +7,16 @@ Rails.application.routes.draw do
   resources :courses, only: :index do
     resources :participants, only: :index
     resource  :subscriptions, only: [:create, :destroy], controller: :course_subscriptions
-    resource :dismiss, only: [:destroy], controller: :course_dismiss
-    resources :lessons
+    resources :lessons, only: [:index, :show] do
+      resources :homeworks, only: [:index, :new, :create]
+    end
   end
 
   namespace :users do
     resource  :profile, only: [:edit, :update], controller: :profile
     resources :courses do
-      resources :lessons do
-        resources :homeworks
-      end
+      resource  :dismiss, only: :create, controller: :course_dismiss
+      resources :lessons
     end
-    delete '/:id/courses/:course_id/ban', to: 'course_dismiss#destroy', as: :delete_course_ban
   end
 end

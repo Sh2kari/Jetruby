@@ -4,7 +4,7 @@ class Users::CoursesController < Users::BaseController
   PER_PAGE = 8
 
   def index
-    @courses = current_user.authored_courses.recent.page(params[:page]).per(params[:per_page] || PER_PAGE).includes(:user)
+    @courses = current_user.authored_courses.page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def new
@@ -14,10 +14,12 @@ class Users::CoursesController < Users::BaseController
   def create
     @course = current_user.authored_courses.build(course_params)
 
-    if @course.save
+    if (current_user.has_role? :trainer) && @course.save
       redirect_to users_courses_path
+      flash[:notice] = 'Course has been successfully created'
     else
       render :new
+      flash[:notice] = 'You are not a trainer'
     end
   end
 
@@ -25,10 +27,12 @@ class Users::CoursesController < Users::BaseController
   end
 
   def update
-    if @course.update(course_params)
+    if (current_user.has_role? :trainer) && @course.update(course_params)
       redirect_to users_courses_path
+      flash[:notice] = 'Course has been successfully updated'
     else
       render :edit
+      flash[:notice] = 'You are not a trainer'
     end
   end
 

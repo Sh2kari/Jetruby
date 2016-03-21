@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  rolify
+
   include Omniauthable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -6,13 +8,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
+  after_create :create_user_profile
+
+  after_create :default_role
+
   has_one :profile
   has_many :courses
   has_many :authored_courses, class_name: 'Course', foreign_key: :user_id
   has_many :social_profiles
   has_many :participated_courses, through: :course_users, source: :course
   has_many :course_users, dependent: :destroy
-  has_many :dismiss, dependent: :destroy
 
   accepts_nested_attributes_for :profile
 
@@ -20,5 +25,20 @@ class User < ActiveRecord::Base
 
   def participate_in?(course)
     course_users.exists?(course_id: course.id)
+  end
+
+  def banned_in?(course)
+    course_users.where(dismiss: false).exists?(course_id: course.id)
+  end
+
+  private
+
+  def create_user_profile
+    build_profile
+    profile.save(validates: false)
+  end
+
+  def default_role
+    add_role(:user)
   end
 end

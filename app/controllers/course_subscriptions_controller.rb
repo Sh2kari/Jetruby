@@ -1,5 +1,6 @@
 class CourseSubscriptionsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :current_user_dismissed
 
   def create
     course.participants << current_user
@@ -15,4 +16,8 @@ class CourseSubscriptionsController < ApplicationController
     @course ||= Course.find(params[:course_id])
   end
   helper_method :course
+
+  def current_user_dismissed
+    render :dismiss if current_user.try(:banned_in?, course)
+  end
 end

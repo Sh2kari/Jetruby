@@ -1,18 +1,19 @@
 class Users::CourseDismissController < Users::BaseController
-  def destroy
-    course.bans << user
-    course.course_users.where(user_id: user.id).first.destroy
+  before_filter :authenticate_user!
+
+  def create
+    course.course_users.find_by_user_id(params[:user_id]).update_attribute(:dismiss, false)
   end
 
   private
 
   def course
-    @course ||= Course.find(params[:course_id])
+    @course ||= current_user.authored_courses.find(params[:course_id])
   end
   helper_method :course
 
   def user
-    @user ||= User.find(params[:id])
+    @user ||= User.find(params[:user_id])
   end
   helper_method :user
 end

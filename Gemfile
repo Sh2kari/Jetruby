@@ -13,7 +13,6 @@ gem 'kaminari', '~> 0.16.3'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.4'
 
-gem 'devise', '~> 3.5.4'
 gem 'haml', '~> 4.0'
 
 gem 'sass-rails', '~> 5.0'
@@ -29,6 +28,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+
+gem 'devise', '~> 3.5.4'
+gem 'rolify', '~> 5.0'
+gem 'cancancan'
 
 gem 'rubocop', '~> 0.37.2'
 gem 'sdoc', '~> 0.4.0', group: :doc

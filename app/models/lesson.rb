@@ -4,5 +4,7 @@ class Lesson < ActiveRecord::Base
 
   validates :title, presence: true
 
+  scope :visible, -> { where(hidden: false) }
+
   mount_uploader :cover, LessonCoverUploader
 end

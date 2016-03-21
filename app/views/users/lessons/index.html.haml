@@ -12,11 +12,12 @@
             %th Cover
             %th Summary
             %th Homework
-            %th Action
+            - if user_signed_in? && course.user.id == current_user.id
+              %th Action
           - @lessons.each do |lesson|
             %tr
               %td
-                = link_to lesson.title, [course, lesson]
+                = link_to lesson.title, [:users, course, lesson]
               %td
                 = lesson.position
               %td
@@ -27,11 +28,12 @@
                 = lesson.summary
               %td
                 = lesson.homework
-              %td
-                = link_to 'Edit', edit_course_lesson_path(course, lesson), class: "btn btn-default"
-                = link_to 'Delete', [course, lesson], method: :delete, data: { confrim: 'Are you sure?'}, class: "btn btn-default"
+              - if user_signed_in? && course.user.id == current_user.id
+                %td
+                  = link_to 'Edit', edit_users_course_lesson_path(course, lesson), class: "btn btn-default"
+                  = link_to 'Delete', [:users, course, lesson], method: :delete, data: { confrim: 'Are you sure?'}, class: "btn btn-default"
 
 
       - if user_signed_in? && course.user.id == current_user.id
-        = link_to 'New Lesson', new_course_lesson_path
+        = link_to 'New Lesson', new_users_course_lesson_path
     = paginate @lessons

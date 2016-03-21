@@ -32,13 +32,21 @@
         = link_to courses_path do
           %i.fa.fa-files-o
           %span Courses
+
       - if user_signed_in?
         %li
           =link_to edit_users_profile_path do
             %i.fa.fa-user
             %span Edit profile
+
+      - if current_user.has_role? :trainer
         %li
           =link_to users_courses_path do
+            %i.fa.fa-files-o
+            %span My Courses
+      - else
+        %li
+          =link_to users_subscription_courses_path do
             %i.fa.fa-files-o
             %span My Courses
 
