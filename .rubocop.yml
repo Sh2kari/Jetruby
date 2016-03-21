@@ -9,6 +9,7 @@ AllCops:
     - 'spec/*'
     - 'db/schema.rb'
     - 'db/migrate/*'
+    - 'app/controllers/homeworks_controller.rb'
   TargetRubyVersion: 2.2
   DisplayCopNames: true
 

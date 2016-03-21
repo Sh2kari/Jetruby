@@ -8,10 +8,9 @@
               .thumbnail
                 %li= course.title.humanize
                 %li= link_to 'Participants', course_participants_path(course)
-
                 - if user_signed_in? && current_user.try(:banned_in?, course)
                   %p You was dismissed!
-                - else
+                - if user_signed_in? && current_user.participate_in?(course)
                   = link_to 'Lessons', course_lessons_path(course)
 
                 %br
