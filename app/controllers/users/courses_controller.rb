@@ -1,10 +1,11 @@
 class Users::CoursesController < Users::BaseController
   before_action :find_course, only: [:edit, :update, :destroy]
+  authorize_resource
 
   PER_PAGE = 8
 
   def index
-    @courses = current_user.authored_courses.page(params[:page]).per(params[:per_page] || PER_PAGE)
+    @courses = current_user.authored_courses.page(params[:page]).per(params[:per_page] || PER_PAGE).includes(:user)
   end
 
   def new
@@ -14,12 +15,10 @@ class Users::CoursesController < Users::BaseController
   def create
     @course = current_user.authored_courses.build(course_params)
 
-    if (current_user.has_role? :trainer) && @course.save
+    if @course.save
       redirect_to users_courses_path
-      flash[:notice] = 'Course has been successfully created'
     else
       render :new
-      flash[:notice] = 'You are not a trainer'
     end
   end
 

@@ -21,4 +21,7 @@
       - else
         %h2 No courses
 
-  = link_to 'New Course', new_users_course_path
+  - if can? :manage, Course
+    = link_to 'New Course', new_users_course_path
+  - else
+    %p You should be a trainer to create new course

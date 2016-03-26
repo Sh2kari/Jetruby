@@ -10,8 +10,8 @@
                 %li= link_to 'Participants', course_participants_path(course)
                 - if user_signed_in? && current_user.try(:banned_in?, course)
                   %p You was dismissed!
-                - if user_signed_in? && current_user.participate_in?(course)
-                  = link_to 'Lessons', course_lessons_path(course)
+                - if user_signed_in? && current_user.participate_in?(course) && !current_user.try(:banned_in?, course)
+                  %p You are subscribed
 
                 %br
                 = image_tag course.cover.admin_thumb

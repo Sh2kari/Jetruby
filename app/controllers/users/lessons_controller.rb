@@ -1,5 +1,6 @@
 class Users::LessonsController < Users::BaseController
   include SortHelper
+  authorize_resource
 
   before_filter :load_lesson, only: [:show, :edit, :update, :destroy]
 
@@ -54,7 +55,7 @@ class Users::LessonsController < Users::BaseController
   end
 
   def course
-    @course ||= current_user.authored_courses.find(params[:course_id])
+   @course ||= current_user.authored_courses.find(params[:course_id])
   end
   helper_method :course
 
