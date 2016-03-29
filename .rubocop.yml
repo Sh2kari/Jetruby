@@ -8,6 +8,8 @@ AllCops:
     - 'bin/*'
     - 'spec/*'
     - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'app/controllers/homeworks_controller.rb'
   TargetRubyVersion: 2.2
   DisplayCopNames: true
 
@@ -27,4 +29,4 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 130
+  Max: 150

@@ -1,11 +1,22 @@
+
 Rails.application.routes.draw do
-  root 'courses#index'
+  root 'welcome#index'
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
-  resources :courses, only: :index
+  resources :courses, only: :index do
+    resources :participants, only: :index
+    resource  :subscriptions, only: [:create, :destroy], controller: :course_subscriptions
+    resources :lessons, only: [:index, :show] do
+      resources :homeworks, only: [:index, :new, :create]
+    end
+  end
 
   namespace :users do
-    resources :courses
+    resource  :profile, only: [:edit, :update], controller: :profile
+    resources :courses do
+      resource  :dismiss, only: :create, controller: :course_dismiss
+      resources :lessons
+    end
   end
 end

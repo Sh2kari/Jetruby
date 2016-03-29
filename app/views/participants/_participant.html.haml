@@ -1,0 +1,13 @@
+%tr{id: "course-participant-#{user.id}"}
+  %td= "#{user.first_name} #{user.last_name}"
+  %td
+    - if user_signed_in? && user.id == current_user.id && !user.try(:banned_in?, course)
+      = link_to 'Unsubscribe', course_subscriptions_path(course), method: :delete, remote: true
+    %br
+    - if user_signed_in? && course.user.id == current_user.id && !user.try(:banned_in?, course)
+      #dismiss-link
+        = link_to 'Dismiss', users_course_dismiss_path(course, user_id: user.id), method: :post, remote: true, data: { confirm: "You sure?" }
+    - if user.try(:banned_in?, course)
+      %p User was dismissed
+    - else
+      %p Making homework

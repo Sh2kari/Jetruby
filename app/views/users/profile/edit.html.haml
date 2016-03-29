@@ -1,0 +1,16 @@
+.row
+  .col-md-8.col-xs-8.col-xs-offset-2.col-md-offset-2
+    .box.box-primary
+      .box-header.with-border
+        %h4 Update profile
+
+        = simple_form_for current_user, url: users_profile_path do |f|
+          = f.input :email
+          = f.input :password
+          = f.input :password_confirmation
+
+          = f.simple_fields_for :profile do |pf|
+            = pf.input :first_name
+            = pf.input :last_name
+
+          = f.submit 'Save', class: 'btn btn-primary'

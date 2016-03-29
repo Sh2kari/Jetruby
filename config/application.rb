@@ -28,3 +28,5 @@ module Jetruby
     config.assets.paths << Rails.root.join('vendor', 'app', 'assets', 'fonts')
   end
 end
+
+require Rails.root.join 'lib', 'modules', 'omniauthable'

@@ -1,0 +1,32 @@
+.content
+  .row
+    .col-md-12
+      %h1 #{course.title} Course
+
+      %table.pretty.table.table-bordered
+        %tbody
+          %tr
+            %th= sortable 'title'
+            %th= sortable 'position'
+            %th Description
+            %th Cover
+            %th Summary
+            %th Homework
+            - if user_signed_in? && course.user.id == current_user.id
+              %th Action
+          - @lessons.each do |lesson|
+            %tr
+              %td
+                = link_to lesson.title, [course, lesson]
+              %td
+                = lesson.position
+              %td
+                = lesson.description
+              %td
+                = image_tag lesson.cover.thumb
+              %td
+                = lesson.summary
+              %td
+                = lesson.homework
+
+    = paginate @lessons

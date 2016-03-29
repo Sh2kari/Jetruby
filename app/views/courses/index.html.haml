@@ -2,12 +2,20 @@
   .row
     .col-md-12
       - if @courses.present?
-        - @courses.each do |course|
-          .col-md-3
-            .thumbnail
-              = course.title.humanize
-              %br
-              = image_tag course.cover.admin_thumb
+        %ul.list-unstyled
+          - @courses.each do |course|
+            .col-md-3
+              .thumbnail
+                %li= course.title.humanize
+                %li= link_to 'Participants', course_participants_path(course)
+
+                - if user_signed_in? && current_user.try(:banned_in?, course)
+                  %p You was dismissed!
+                - else
+                  = link_to 'Lessons', course_lessons_path(course)
+
+                %br
+                = image_tag course.cover.admin_thumb
         = paginate @courses
       - else
         %h2 No courses
